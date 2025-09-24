@@ -1,0 +1,196 @@
+:root{
+  --bg:#ffffff;
+  --ink:#1f2937;
+  --ink-dim:#4b5563;
+  --brand:#0ea5e9;
+  --brand-2:#22c55e;
+  --line:#e5e7eb;
+  --shadow:0 8px 24px rgba(0,0,0,.12);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Arial,sans-serif;
+  color:var(--ink); background:var(--bg);
+}
+
+/* ===== TOP UTILITY BAR ===== */
+.util{background:#fafafa; border-bottom:1px solid var(--line)}
+.util__inner{
+  max-width:1200px; margin:0 auto; padding:8px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-size:.9rem; color:var(--ink-dim);
+}
+.util__left,.util__right{display:flex; align-items:center; gap:10px}
+.util__link{color:inherit; text-decoration:none}
+.util__link:hover{color:#111}
+.util__sep{opacity:.6}
+.util__lang{
+  background:#fff; border:1px solid var(--line); padding:4px 8px; border-radius:6px;
+  cursor:pointer; color:#111; font-weight:600;
+}
+.util__lang:focus-visible{outline:2px solid var(--brand)}
+.util__search{
+  display:grid; place-items:center; width:30px; height:30px; border-radius:6px;
+  border:1px solid var(--line); background:#fff; color:#111; cursor:pointer;
+}
+.util__search:focus-visible{outline:2px solid var(--brand)}
+
+/* ===== NAVBAR ===== */
+.nav{
+  position:sticky; top:0; z-index:40; background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+.nav__inner{
+  max-width:1200px; margin:0 auto; display:flex; align-items:center; gap:24px; padding:12px 20px;
+}
+.logo{display:flex; align-items:center; gap:10px; text-decoration:none}
+.logo img{height:40px; width:auto; display:block}
+.badge{font-weight:700; font-size:.8rem; color:#0f172a; background:#f1f5f9; padding:4px 8px; border-radius:999px}
+.menu{margin-left:auto; display:flex; gap:24px; flex-wrap:wrap}
+.menu a{color:var(--ink); text-decoration:none; font-weight:600; position:relative; padding:8px 2px}
+.menu a::after{
+  content:""; position:absolute; left:0; bottom:0; height:2px; width:0;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2)); transition:width .25s ease;
+}
+.menu a:hover::after,.menu a:focus-visible::after{width:100%}
+.menu a:focus-visible{outline:2px solid var(--brand); outline-offset:4px; border-radius:4px}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#fff}
+.breadcrumb__inner{
+  max-width:1200px; margin:0 auto; padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  color:var(--ink-dim); font-size:.95rem;
+}
+.crumb{color:inherit; text-decoration:none}
+.crumb:hover{color:#111}
+.crumb__sep{opacity:.6}
+.crumb--current{font-weight:700; color:#111}
+
+/* ===== HERO / SLIDER ===== */
+.hero{position:relative; height:calc(100vh - 68px - 42px); min-height:520px; overflow:hidden; background:#ffffff}
+.slide{position:absolute; inset:0; opacity:0; transition:opacity .7s ease}
+.slide img{width:100%; height:100%; object-fit:cover; object-position:center; filter:contrast(1.03) saturate(1.05)}
+.slide.active{opacity:1}
+
+/* overlay heading */
+.overlay{position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:0 16px}
+.title{
+  line-height:1.1; letter-spacing:.5px; color:#fff; text-shadow:0 6px 24px rgba(0,0,0,.45);
+  font-weight:800; font-size:clamp(28px,5vw,52px); animation:breath 3s ease-in-out infinite alternate;
+}
+.subtitle{margin-top:10px; color:#e5e7eb; font-weight:700; font-size:clamp(16px,2.2vw,28px)}
+@keyframes breath{from{transform:translateY(0) scale(1)} to{transform:translateY(-4px) scale(1.03)}}
+
+/* arrows */
+.arrow{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:46px; height:46px; border-radius:50%; display:grid; place-items:center; border:none; cursor:pointer;
+  background:rgba(255,255,255,.85); box-shadow:var(--shadow);
+}
+.arrow:hover{background:#fff}
+.arrow:focus-visible{outline:2px solid var(--brand)}
+.arrow--prev{left:14px}
+.arrow--next{right:14px}
+
+/* dots */
+.dots{
+  position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
+  display:flex; gap:10px; padding:6px 10px; background:rgba(17,24,39,.35); border-radius:999px; backdrop-filter:blur(4px)
+}
+.dot{width:10px; height:10px; border-radius:50%; background:#cbd5e1; border:none; cursor:pointer}
+.dot.active{background:#fff}
+
+/* footer */
+footer{padding:28px 20px; text-align:center; color:var(--ink-dim); border-top:1px solid var(--line)}
+
+/* ===== SEARCH DRAWER ===== */
+.drawer{
+  position:fixed; inset:0; background:rgba(0,0,0,.25); display:none; z-index:60;
+}
+.drawer[aria-hidden="false"]{display:block}
+.drawer__panel{
+  position:absolute; right:0; top:0; bottom:0; width:min(420px,92vw);
+  background:#fff; border-left:1px solid var(--line); box-shadow:var(--shadow); padding:20px;
+  display:flex; flex-direction:column; gap:14px;
+}
+.drawer__title{margin:0; font-size:1.1rem}
+.drawer__form{display:flex; gap:10px}
+.drawer__input{
+  flex:1; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:1rem
+}
+.drawer__btn{
+  padding:10px 16px; border:0; border-radius:8px; background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:#fff; font-weight:700; cursor:pointer
+}
+.drawer__close{
+  align-self:flex-end; border:0; background:#f3f4f6; width:32px; height:32px; border-radius:8px; cursor:pointer
+}
+
+@media (max-width:760px){
+  .menu{gap:14px}
+  .nav__inner{padding:10px 14px}
+}
+/* ===== PROJECT COMPLETION SECTION (versi 2 kolom + frame kuning) ===== */
+.project{
+  background:#f3f4f6; padding:30px 0;
+}
+.project__wrap{
+  max-width:1200px; margin:0 auto; display:grid; gap:0;
+  grid-template-columns: 1.2fr 1fr;   /* kiri lebih lebar */
+}
+
+/* Galeri kiri */
+.project__media{
+  position:relative; min-height:520px; background:#f8f7f7; overflow:hidden;
+}
+.p-slide{position:absolute; inset:0; opacity:0; transition:opacity .7s ease}
+.p-slide.active{opacity:1}
+.p-slide img{width:100%; height:100%; object-fit:cover; object-position:center}
+
+/* Panel kanan dengan frame kuning */
+.project__panel{
+  background:#f9fafb; position:relative; display:grid; place-items:center;
+  padding:30px;
+}
+.frame{
+  position:relative; width:min(560px, 96%); background:#fff; padding:34px 24px;
+  box-shadow:0 8px 24px rgba(255, 255, 255, 0.06);
+}
+/* garis bingkai kuning di luar konten */
+.frame::before{
+  content:""; position:absolute; inset:14px; pointer-events:none;
+  border:6px solid #f3c24f; /* kuning */
+}
+
+/* judul & grid angka */
+.project__title{
+  text-align:center; font-size:1.6rem; font-weight:800; color:#1f2937; margin:0 0 22px;
+  letter-spacing:.04em;
+}
+.project__grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:18px; text-align:center;
+}
+.card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:22px 14px;
+  transition:transform .2s ease; box-shadow:0 4px 12px rgba(241, 239, 239, 0.04);
+}
+.card:hover{transform:translateY(-4px)}
+.num{font-size:2.8rem; font-weight:900; margin-bottom:8px; transition:transform .2s ease}
+.card:hover .num{transform:translateY(-2px)}
+.num.blue{color:#3b82f6}
+.num.green{color:#22c55e}
+.num.orange{color:#f97316}
+.label{font-weight:700; color:#374151; line-height:1.35; font-size:.95rem}
+
+/* Responsif */
+@media (max-width: 980px){
+  .project__wrap{grid-template-columns:1fr}
+  .project__media{min-height:360px}
+  .frame{width:92%}
+  .project__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width: 640px){
+  .project__grid{grid-template-columns:1fr; gap:12px}
+  .frame::before{inset:10px; border-width:5px}
+}
